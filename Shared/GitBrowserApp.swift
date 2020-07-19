@@ -12,6 +12,7 @@ struct GitBrowserApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(NetworkStore())
         }
     }
 }
