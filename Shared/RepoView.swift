@@ -11,6 +11,8 @@ struct RepoView: View {
     var repo: Repo
     @Environment(\.openURL) var openURL
     @Environment(\.colorScheme) var colorScheme
+    @State var urlTapped: URL = URL(string: "www.google.com")!
+    @State var didTap: Bool? = false
     
     var body: some View {
         HStack {
@@ -29,10 +31,14 @@ struct RepoView: View {
             .cornerRadius(5.0)
             .onTapGesture {
                 if let urlS = repo.html_url, let url = URL(string: urlS)  {
-                    openURL(url)
+                    urlTapped = url
+                    didTap = true
                 }
             }
         }
+        NavigationLink(destination: WebView(request: URLRequest(url: urlTapped)), tag: true, selection: $didTap) {
+            EmptyView()
+        }.frame(width: 0.0, height: 0.0)
     }
 }
 

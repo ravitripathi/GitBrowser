@@ -13,6 +13,15 @@ struct FollowingUserView: View {
     @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var netStore: NetworkStore
     var selected: Bool
+    
+    var highlightColor: Color {
+        var col = (colorScheme == .dark ? Color.white : Color.black)
+        if selected {
+            col = Color.white
+        }
+        return col
+    }
+    
     var body: some View {
         VStack {
             if let urlS = followingUser.avatar_url, let url = URL(string: urlS) {
@@ -20,11 +29,12 @@ struct FollowingUserView: View {
                     .resizable()
                     .frame(width: 65.0, height: 65.0)
                     .clipShape(Circle())
-                    .overlay(Circle().stroke(colorScheme == .dark ? Color.white : Color.black, lineWidth: 4))
+                    .overlay(Circle().stroke(highlightColor, lineWidth: 4))
             }
             Text(followingUser.login ?? "")
                 .font(.headline)
                 .frame(height: 35.0)
+                .foregroundColor(highlightColor)
         }.frame(width: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, height: 120)
         .background(selected ? Color.blue: Color.clear)
         .cornerRadius(5.0)
