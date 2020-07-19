@@ -10,14 +10,21 @@ import Combine
 
 struct MainView: View {
     @EnvironmentObject var netStore: NetworkStore
-    
+    @State var selectedUser = FollowingUser()
     let user: User
     
     var followingView: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack{
                 ForEach(netStore.following) { user in
-                    FollowingUserView(followingUser: user)
+                    let isSelected = (user.login == self.selectedUser.login)
+                    FollowingUserView(followingUser: user, selected: isSelected).onTapGesture {
+                        self.selectedUser = user
+                        if let username = user.login {
+                            User.selected.login = username
+                            netStore.fetchRepo(forUsername: username)
+                        }
+                    }
                 }
             }
         }
@@ -33,13 +40,24 @@ struct MainView: View {
         
         VStack(alignment: .leading) {
             UserHeader(user: user)
+                .onTapGesture {
+                    self.selectedUser = FollowingUser()
+                    User.selected.login = User.current.login
+                    netStore.fetch()
+                }
             
             Text("Following")
                 .font(.title)
             followingView
             
-            Text("Your repos")
-                .font(.title)
+            if User.selected.login == User.current.login {
+                Text("Your repos")
+                    .font(.title)
+            } else {
+                Text("\(User.selected.login ?? "")'s repos")
+                    .font(.title)
+            }
+            
             repoListView
             
         }.padding(EdgeInsets(top: 0.0, leading: 10.0, bottom: 0.0, trailing: 10.0))

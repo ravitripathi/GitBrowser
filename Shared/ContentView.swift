@@ -27,7 +27,8 @@ struct ContentView: View {
                 }
                 
                 Button(action: {
-                    User.userName = self.enteredTitle.trimmingCharacters(in: .whitespacesAndNewlines)
+                    User.current.login = self.enteredTitle.trimmingCharacters(in: .whitespacesAndNewlines)
+                    User.selected.login = User.current.login
                     hitApi()
                 }, label: {
                     Text("Let's go")

@@ -11,7 +11,8 @@ import KingfisherSwiftUI
 struct FollowingUserView: View {
     var followingUser: FollowingUser
     @Environment(\.colorScheme) var colorScheme
-    
+    @EnvironmentObject var netStore: NetworkStore
+    var selected: Bool
     var body: some View {
         VStack {
             if let urlS = followingUser.avatar_url, let url = URL(string: urlS) {
@@ -25,6 +26,8 @@ struct FollowingUserView: View {
                 .font(.headline)
                 .frame(height: 35.0)
         }.frame(width: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, height: 120)
+        .background(selected ? Color.blue: Color.clear)
+        .cornerRadius(5.0)
     }
 }
 
@@ -38,6 +41,6 @@ struct FollowingUserView_Previews: PreviewProvider {
     }
     
     static var previews: some View {
-        FollowingUserView(followingUser: fU)
+        FollowingUserView(followingUser: fU, selected: false)
     }
 }

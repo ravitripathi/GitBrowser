@@ -31,4 +31,14 @@ class NetworkStore: ObservableObject {
             }
         }
     }
+    
+    func fetchRepo(forUsername username: String) {
+        NetworkManager.shared.getRepoList(forUsername: username) { (repoList) -> (Void) in
+            if let rL = repoList {
+                DispatchQueue.main.async {
+                    self.repos = rL
+                }
+            }
+        }
+    }
 }
