@@ -16,6 +16,10 @@ struct MainView: View {
     var followingView: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack{
+                if netStore.isLoadingFollowList {
+                    ProgressView()
+                        .progressViewStyle(CircularProgressViewStyle())
+                }
                 ForEach(netStore.following) { user in
                     let isSelected = (user.login == self.selectedUser.login)
                     FollowingUserView(followingUser: user, selected: isSelected).onTapGesture {
@@ -57,8 +61,20 @@ struct MainView: View {
                 Text("\(User.selected.login ?? "")'s repos")
                     .font(.title)
             }
-            
-            repoListView
+            if netStore.isLoadingRepos {
+                VStack {
+                    Spacer()
+                    HStack{
+                        Spacer()
+                        ProgressView()
+                            .progressViewStyle(CircularProgressViewStyle())
+                        Spacer()
+                    }
+                    Spacer()
+                }
+            } else {
+                repoListView
+            }
             
         }.padding(EdgeInsets(top: 0.0, leading: 10.0, bottom: 0.0, trailing: 10.0))
         .onAppear {

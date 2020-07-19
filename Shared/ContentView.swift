@@ -10,7 +10,7 @@ import SwiftUI
 struct ContentView: View {
     @State var enteredTitle: String = ""
     @State var doneLoading: Bool? = false
-    
+    @State var loaderStarted: Bool = false
     var body: some View {
         NavigationView {
             VStack {
@@ -27,12 +27,17 @@ struct ContentView: View {
                 }
                 
                 Button(action: {
+                    loaderStarted = true
                     User.current.login = self.enteredTitle.trimmingCharacters(in: .whitespacesAndNewlines)
                     User.selected.login = User.current.login
                     hitApi()
                 }, label: {
                     Text("Let's go")
                 })
+                if loaderStarted {
+                    ProgressView()
+                    .progressViewStyle(CircularProgressViewStyle())
+                }
                 Spacer()
                 
                 NavigationLink(destination: MainView(user: User.current), tag: true, selection: $doneLoading) {
@@ -49,6 +54,7 @@ struct ContentView: View {
             if let user = user {
                 User.current = user
                 doneLoading = true
+                loaderStarted = false
             }
         }
     }
