@@ -33,7 +33,6 @@ struct MainView: View {
         
         VStack(alignment: .leading) {
             UserHeader(user: user)
-                .frame(height: 200)
             
             Text("Following")
                 .font(.title)
@@ -49,6 +48,7 @@ struct MainView: View {
             netStore.fetch()
             netStore.fetchFollowing()
         }
+        .navigationBarTitle(Text("GitBrowser"), displayMode: .inline)
     }
 }
 

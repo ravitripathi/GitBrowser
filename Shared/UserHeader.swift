@@ -27,7 +27,7 @@ struct UserHeader: View {
                 Text("@\(user.login ?? "")")
                     .font(.title2)
             }
-        }.frame(height: 200)
+        }.frame(height: 120)
         
     }
 }
