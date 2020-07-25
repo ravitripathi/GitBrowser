@@ -8,8 +8,7 @@
 import Foundation
 
 struct AppData {
-    @Storage(key: "selected_user", defaultValue: User())
-    static var selectedUser: User
+    static var selectedUser = User()
     @Storage(key: "current_user", defaultValue: User())
     static var currentUser: User
 }

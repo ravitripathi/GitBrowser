@@ -48,8 +48,8 @@ class NetworkManager: ObservableObject {
         task.resume()
     }
     
-    func getRepoList(forUsername username: String? = AppData.currentUser.login, completion: @escaping ([Repo]?) -> (Void)) {
-        guard let name = username, let url = API.repos.getURL(forUsername: name) else {
+    func getRepoList(forUsername username: String? = AppData.currentUser.login, pageNumber page: Int = 1, completion: @escaping ([Repo]?) -> (Void)) {
+        guard let name = username, let urlS = API.repos.getURL(forUsername: name)?.absoluteString, let url = URL(string: "\(urlS)?page=\(page)") else {
             completion(nil)
             return
         }

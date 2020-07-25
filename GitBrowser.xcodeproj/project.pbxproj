@@ -36,6 +36,8 @@
 		4156C3EA24CC23760091E585 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4156C3E824CC23760091E585 /* Storage.swift */; };
 		4156C3EC24CC28B10091E585 /* AppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4156C3EB24CC28B10091E585 /* AppData.swift */; };
 		4156C3ED24CC28B10091E585 /* AppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4156C3EB24CC28B10091E585 /* AppData.swift */; };
+		416BEB6624CC4655002D39C4 /* AllRepoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416BEB6524CC4655002D39C4 /* AllRepoView.swift */; };
+		416BEB6724CC4655002D39C4 /* AllRepoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416BEB6524CC4655002D39C4 /* AllRepoView.swift */; };
 		418977ED24C445A300970251 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418977EC24C445A300970251 /* MainView.swift */; };
 		418977EE24C445A300970251 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418977EC24C445A300970251 /* MainView.swift */; };
 /* End PBXBuildFile section */
@@ -61,6 +63,7 @@
 		4148482A24C363F800720E7B /* UserHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserHeader.swift; sourceTree = "<group>"; };
 		4156C3E824CC23760091E585 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		4156C3EB24CC28B10091E585 /* AppData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppData.swift; sourceTree = "<group>"; };
+		416BEB6524CC4655002D39C4 /* AllRepoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllRepoView.swift; sourceTree = "<group>"; };
 		418977EC24C445A300970251 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -109,6 +112,7 @@
 				4136A5BD24C47FB600B49C44 /* FollowingUserView.swift */,
 				4136A5C024C4AB7300B49C44 /* WebView.swift */,
 				4156C3E824CC23760091E585 /* Storage.swift */,
+				416BEB6524CC4655002D39C4 /* AllRepoView.swift */,
 				4156C3EB24CC28B10091E585 /* AppData.swift */,
 			);
 			path = Shared;
@@ -260,6 +264,7 @@
 				4148482624C33E7E00720E7B /* FollowingUser.swift in Sources */,
 				4136A5BB24C4702B00B49C44 /* NetworkStore.swift in Sources */,
 				4148482824C33E7E00720E7B /* Repo.swift in Sources */,
+				416BEB6624CC4655002D39C4 /* AllRepoView.swift in Sources */,
 				4148481024C33E1300720E7B /* ContentView.swift in Sources */,
 				4148480E24C33E1300720E7B /* GitBrowserApp.swift in Sources */,
 				4136A5C124C4AB7300B49C44 /* WebView.swift in Sources */,
@@ -281,6 +286,7 @@
 				4148482724C33E7E00720E7B /* FollowingUser.swift in Sources */,
 				4136A5BC24C4702B00B49C44 /* NetworkStore.swift in Sources */,
 				4148482924C33E7E00720E7B /* Repo.swift in Sources */,
+				416BEB6724CC4655002D39C4 /* AllRepoView.swift in Sources */,
 				4148481124C33E1300720E7B /* ContentView.swift in Sources */,
 				4148480F24C33E1300720E7B /* GitBrowserApp.swift in Sources */,
 				4136A5C224C4AB7300B49C44 /* WebView.swift in Sources */,

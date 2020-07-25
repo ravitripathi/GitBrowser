@@ -64,7 +64,11 @@ struct MainView: View {
             
             HStack {
                 Text(str).font(.title)
-                Text("See All").foregroundColor(Color.blue)
+                Spacer()
+                NavigationLink(destination:
+                                AllRepoView(viewModel: AllRepoViewModel(withName: AppData.selectedUser.login ?? ""))){
+                    Text("See All").foregroundColor(Color.blue)
+                }
             }
             
             if netStore.isLoadingRepos {
