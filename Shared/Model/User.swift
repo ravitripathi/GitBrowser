@@ -9,9 +9,6 @@
 import Foundation
 
 class User: Codable {
-    static var selected = User()
-    static var current = User()
-    static var userName: String?
     var login: String?
     var avatar_url: String?
     var html_url: String?

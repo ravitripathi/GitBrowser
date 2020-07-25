@@ -29,7 +29,7 @@ class NetworkManager: ObservableObject {
     static let shared = NetworkManager()
     static let baseURL = "https://api.github.com/users/"
     //By default, the URLSessions are GET requests
-    func getFollowingList(forUsername username: String? = User.current.login,
+    func getFollowingList(forUsername username: String? = AppData.currentUser.login,
                           completion: @escaping ([FollowingUser]?) -> (Void)) {
         guard let name = username, let url = API.following.getURL(forUsername: name) else {
             return
@@ -48,7 +48,7 @@ class NetworkManager: ObservableObject {
         task.resume()
     }
     
-    func getRepoList(forUsername username: String? = User.current.login, completion: @escaping ([Repo]?) -> (Void)) {
+    func getRepoList(forUsername username: String? = AppData.currentUser.login, completion: @escaping ([Repo]?) -> (Void)) {
         guard let name = username, let url = API.repos.getURL(forUsername: name) else {
             completion(nil)
             return
@@ -67,7 +67,7 @@ class NetworkManager: ObservableObject {
         task.resume()
     }
     
-    func getUserDetails(forUsername username: String? = User.current.login, completion: @escaping (User?)->(Void)) {
+    func getUserDetails(forUsername username: String? = AppData.currentUser.login, completion: @escaping (User?)->(Void)) {
         guard let name = username, let url = API.userDetail.getURL(forUsername: name) else {
             completion(nil)
             return

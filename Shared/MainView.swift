@@ -25,7 +25,7 @@ struct MainView: View {
                     FollowingUserView(followingUser: user, selected: isSelected).onTapGesture {
                         self.selectedUser = user
                         if let username = user.login {
-                            User.selected.login = username
+                            AppData.selectedUser.login = username
                             netStore.fetchRepo(forUsername: username)
                         }
                     }
@@ -46,7 +46,7 @@ struct MainView: View {
             UserHeader(user: user)
                 .onTapGesture {
                     self.selectedUser = FollowingUser()
-                    User.selected.login = User.current.login
+                    AppData.selectedUser.login = AppData.currentUser.login
                     netStore.fetch()
                 }
             
@@ -54,13 +54,19 @@ struct MainView: View {
                 .font(.title)
             followingView
             
-            if User.selected.login == User.current.login {
-                Text("Your repos")
-                    .font(.title)
-            } else {
-                Text("\(User.selected.login ?? "")'s repos")
-                    .font(.title)
+            let str: String = {
+                if AppData.selectedUser.login == AppData.currentUser.login {
+                    return "Your repos"
+                } else {
+                    return "\(AppData.selectedUser.login ?? "")'s repos"
+                }
+            }()
+            
+            HStack {
+                Text(str).font(.title)
+                Text("See All").foregroundColor(Color.blue)
             }
+            
             if netStore.isLoadingRepos {
                 VStack {
                     Spacer()

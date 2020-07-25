@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var enteredTitle: String = ""
+    @State var enteredTitle: String = AppData.currentUser.login ?? ""
     @State var doneLoading: Bool? = false
     @State var loaderStarted: Bool = false
     var body: some View {
@@ -28,8 +28,8 @@ struct ContentView: View {
                 
                 Button(action: {
                     loaderStarted = true
-                    User.current.login = self.enteredTitle.trimmingCharacters(in: .whitespacesAndNewlines)
-                    User.selected.login = User.current.login
+                    AppData.currentUser.login = self.enteredTitle.trimmingCharacters(in: .whitespacesAndNewlines)
+                    AppData.selectedUser.login = AppData.currentUser.login
                     hitApi()
                 }, label: {
                     Text("Let's go")
@@ -40,7 +40,7 @@ struct ContentView: View {
                 }
                 Spacer()
                 
-                NavigationLink(destination: MainView(user: User.current), tag: true, selection: $doneLoading) {
+                NavigationLink(destination: MainView(user: AppData.currentUser), tag: true, selection: $doneLoading) {
                     EmptyView()
                 }
                 
@@ -52,7 +52,7 @@ struct ContentView: View {
     func hitApi() {
         NetworkManager.shared.getUserDetails { user  in
             if let user = user {
-                User.current = user
+                AppData.currentUser = user
                 doneLoading = true
                 loaderStarted = false
             }
