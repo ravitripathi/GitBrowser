@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var enteredTitle: String = AppData.currentUser.login ?? ""
+    @State var enteredTitle: String = AppData.lastCurrentUsername
     @State var doneLoading: Bool? = false
     @State var loaderStarted: Bool = false
     var body: some View {
@@ -30,6 +30,7 @@ struct ContentView: View {
                     loaderStarted = true
                     AppData.currentUser.login = self.enteredTitle.trimmingCharacters(in: .whitespacesAndNewlines)
                     AppData.selectedUser.login = AppData.currentUser.login
+                    AppData.lastCurrentUsername = self.enteredTitle.trimmingCharacters(in: .whitespacesAndNewlines)
                     hitApi()
                 }, label: {
                     Text("Let's go")
