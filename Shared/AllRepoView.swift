@@ -19,6 +19,7 @@ struct AllRepoView: View {
                     self.list = repo
                 }
             }.disableAutocorrection(true)
+            .padding()
             List(list.indices, id: \.self) { index in
                 RepoView(repo: list[index]).onAppear {
                     if index > (list.count - 3) {
@@ -38,7 +39,9 @@ struct AllRepoView: View {
 
 struct AllRepoView_Previews: PreviewProvider {
     static var previews: some View {
+        NavigationView {
         AllRepoView(viewModel: AllRepoViewModel(withName: "ravitripathi"))
+        }
     }
 }
 
