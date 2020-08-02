@@ -12,13 +12,17 @@ enum API: String {
     case following
     case repos
     case userDetail
+    case search
     
     func getURL(forUsername userName: String) -> URL? {
         var composedURLString = ""
-        if self != .userDetail {
-            composedURLString = "\(NetworkManager.baseURL)\(userName)/\(self.rawValue)"
-        } else {
+        switch self {
+        case .search:
+            composedURLString = "https://api.github.com/search/repositories"
+        case .userDetail:
             composedURLString = "\(NetworkManager.baseURL)\(userName)"
+        default:
+            composedURLString = "\(NetworkManager.baseURL)\(userName)/\(self.rawValue)"
         }
         return URL(string: composedURLString)
     }
@@ -62,6 +66,24 @@ class NetworkManager: ObservableObject {
             
             if let data = data, let decodedResponse = try? JSONDecoder().decode([Repo].self, from: data) {
                 completion(decodedResponse)
+            }
+        }
+        task.resume()
+    }
+    
+    func searchRepo(withName name: String, userName: String, completion: @escaping ([Repo]?)->(Void)) {
+        guard !name.isEmpty, let absoluteString = API.search.getURL(forUsername: userName)?.absoluteString, let url = URL(string: "\(absoluteString)?q=\(name)+user:\(userName)") else {
+            completion(nil)
+            return
+        }
+        let task = URLSession(configuration: URLSessionConfiguration.default).dataTask(with: url) { (data, response, error) in
+            guard let httpResponse = response as? HTTPURLResponse,
+                  (200...299).contains(httpResponse.statusCode), let data = data else {
+                completion(nil)
+                return
+            }
+            if let decodedResponse = try? JSONDecoder().decode(SearchResponse.self, from: data) {
+                completion(decodedResponse.items)
             }
         }
         task.resume()

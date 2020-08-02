@@ -13,11 +13,18 @@ struct AllRepoView: View {
     @State var list: [Repo] = []
     
     var body: some View {
-        List(list.indices, id: \.self) { index in
-            RepoView(repo: list[index]).onAppear {
-                if index > (list.count - 3) {
-                    viewModel.fetchRepos { (repoList) in
-                        self.list = repoList
+        VStack {
+            SearchBar { (text) in
+                viewModel.search(name: text) { (repo) in
+                    self.list = repo
+                }
+            }
+            List(list.indices, id: \.self) { index in
+                RepoView(repo: list[index]).onAppear {
+                    if index > (list.count - 3) {
+                        viewModel.fetchRepos { (repoList) in
+                            self.list = repoList
+                        }
                     }
                 }
             }
@@ -65,4 +72,21 @@ class AllRepoViewModel {
         }
     }
     
+    
+    func search(name: String, completion: @escaping ([Repo])->()) {
+        if name.isEmpty {
+            completion(self.repoList)
+            return
+        }
+        NetworkManager.shared.searchRepo(withName: name, userName: self.userName) { (repos) -> (Void) in
+            DispatchQueue.main.async {
+                if let repos = repos {
+                    completion(repos)
+                } else {
+                    completion(self.repoList)
+                }
+            }
+            
+        }
+    }
 }
