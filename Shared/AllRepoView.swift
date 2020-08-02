@@ -18,7 +18,7 @@ struct AllRepoView: View {
                 viewModel.search(name: text) { (repo) in
                     self.list = repo
                 }
-            }
+            }.disableAutocorrection(true)
             List(list.indices, id: \.self) { index in
                 RepoView(repo: list[index]).onAppear {
                     if index > (list.count - 3) {
