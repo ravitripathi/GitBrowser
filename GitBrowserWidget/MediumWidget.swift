@@ -12,16 +12,17 @@ import KingfisherSwiftUI
 struct MediumWidget: View {
     
     @State var user: User
+    @State var imageData: Data
+    
     var body: some View {
         HStack {
-            if let urlS = user.avatar_url, let url = URL(string: urlS) {
-                KFImage(url)
-                    .resizable()
-                    .frame(width: 100.0, height: 100.0)
-                    .clipShape(Circle())
-                    .overlay(Circle().stroke(Color.white, lineWidth: 4))
-                    .shadow(radius: 10)
-            }
+            Image(uiImage: UIImage(data: imageData)!)
+                .resizable()
+                .frame(width: 100.0, height: 100.0)
+                .clipShape(Circle())
+                .overlay(Circle().stroke(Color.white, lineWidth: 4))
+                .shadow(radius: 10)
+            
             VStack(alignment: .leading) {
                 Text(user.name ?? "")
                     .font(.title)
@@ -49,7 +50,7 @@ struct MediumWidget_Previews: PreviewProvider {
     
     static var previews: some View {
         Group {
-            MediumWidget(user: MediumWidget_Previews.dummyUser)
+            MediumWidget(user: MediumWidget_Previews.dummyUser, imageData: UIImage(systemName: "person")!.pngData()!)
                 .previewContext(WidgetPreviewContext(family: .systemMedium))
         }
     }

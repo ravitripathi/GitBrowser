@@ -13,42 +13,52 @@ import Intents
 struct GithubUserEntry: TimelineEntry {
     let date: Date
     let userData: User
+    let imageData: Data
 }
 
-//Contains logic for updating/viewing the widget
-struct Provider: TimelineProvider {
-
-    
+// Dynamic, confiurable widget
+// Contains logic for updating/viewing the widget
+struct GitBrowserIntentTimelineProvider: IntentTimelineProvider {
     typealias Entry = GithubUserEntry
     
-    //Renders snapshot on home page. Dummy data. Fast returning
-    func snapshot(with context: Context, completion: @escaping (GithubUserEntry) -> ()) {
-        
-        let entry = GithubUserEntry(date: Date(), userData: User())
+    typealias Intent = GitBrowserIntentIntent
+    
+    func getSnapshot(for configuration: GitBrowserIntentIntent, in context: Context, completion: @escaping (GithubUserEntry) -> Void) {
+        let entry = GithubUserEntry(date: Date(), userData: User(), imageData: UIImage(systemName: "person")!.pngData()!)
         completion(entry)
     }
     
-    func timeline(with context: Context, completion: @escaping (Timeline<GithubUserEntry>) -> ()) {
-        NetworkManager.shared.getUserDetails(forUsername: AppData.lastCurrentUsername) { (user) -> (Void) in
-            guard let user = user else {
-                let entry = GithubUserEntry(date: Date(), userData: User())
-                let timeline = Timeline(entries: [entry], policy: .atEnd)
-                completion(timeline)
+    func getTimeline(for configuration: GitBrowserIntentIntent, in context: Context, completion: @escaping (Timeline<GithubUserEntry>) -> Void) {
+        
+        var username = AppData.lastCurrentUsername
+        if let u = configuration.username, !u.isEmpty {
+            username = u
+        }
+        NetworkManager.shared.getUserDetails(forUsername: username) { (user) -> (Void) in
+            let emptyTimeLine = Timeline(entries: [GithubUserEntry(date: Date(), userData: User(), imageData: Data())], policy: .atEnd)
+            guard let user = user, let userImageUrlS = user.avatar_url, let userImageUrl = URL(string: userImageUrlS) else {
+                completion(emptyTimeLine)
                 return
             }
-            let entry = GithubUserEntry(date: Date(), userData: user)
-            //Policy decides when to reload the widget. We pass never (so remains fixed)
-    //        let timeline = Timeline(entries: [entry], policy: .never)
-            let timeline = Timeline(entries: [entry], policy: .atEnd)
-            completion(timeline)
+            
+            URLSession.shared.dataTask(with: userImageUrl) { (data, resp, error) in
+                guard let data = data else {
+                    completion(emptyTimeLine)
+                    return
+                }
+                let entry = GithubUserEntry(date: Date(), userData: user, imageData: data)
+                //Policy decides when to reload the widget. never -> remains fixed
+                let timeline = Timeline(entries: [entry], policy: .atEnd)
+                completion(timeline)
+            }.resume()
         }
     }
- }
+}
 
 //What the widget should look like
 struct WidgetEntryView: View {
     
-    let entry: Provider.Entry
+    let entry: GitBrowserIntentTimelineProvider.Entry
     
     @Environment(\.widgetFamily) var family
     
@@ -56,7 +66,7 @@ struct WidgetEntryView: View {
     var body: some View {
         switch family {
         default:
-            MediumWidget(user: entry.userData)
+            MediumWidget(user: entry.userData, imageData: entry.imageData)
         }
         
     }
@@ -68,14 +78,53 @@ struct WidgetEntryView: View {
 struct ArcWidget: Widget {
     
     private let kind = "ArcWidget"
-   
     
     var body: some WidgetConfiguration {
-        StaticConfiguration(kind: kind, provider: Provider()) { entry in
+        IntentConfiguration(kind: kind, intent: GitBrowserIntentIntent.self, provider: GitBrowserIntentTimelineProvider()) { entry in
             WidgetEntryView(entry: entry)
-        }
-        .supportedFamilies([.systemMedium])
-//        Use this to set what sizes of widgets you want to support. Also works without it
-//
+        }.supportedFamilies([.systemMedium])
+        //        Use this to set what sizes of widgets you want to support. Also works without it
+        
+        //        Building static widgets
+        //        StaticConfiguration(kind: kind, provider: Provider()) { entry in
+        //            WidgetEntryView(entry: entry)
+        //        }
+        //        .supportedFamilies([.systemMedium])
     }
 }
+
+//Static Widget Timeline
+//Contains logic for updating/viewing the widget
+//struct Provider: IntentTimelineProvider {
+//
+////    typealias Entry = GithubUserEntry
+//    typealias Intent = GithubUserEntry
+//
+//    //Renders snapshot on home page. Dummy data. Fast returning
+//    func getSnapshot(for configuration: Intent, in context: Context, completion: @escaping (GithubUserEntry) -> Void) {
+//        let entry = GithubUserEntry(date: Date(), userData: User(), imageData: UIImage(systemName: "person")!.pngData()!)
+//        completion(entry)
+//    }
+//
+//
+//    func getTimeline(for configuration: Intent, in context: Context, completion: @escaping (Timeline<GithubUserEntry>) -> Void) {
+//        NetworkManager.shared.getUserDetails(forUsername: AppData.lastCurrentUsername) { (user) -> (Void) in
+//            let emptyTimeLine = Timeline(entries: [GithubUserEntry(date: Date(), userData: User(), imageData: Data())], policy: .atEnd)
+//            guard let user = user, let userImageUrlS = user.avatar_url, let userImageUrl = URL(string: userImageUrlS) else {
+//                completion(emptyTimeLine)
+//                return
+//            }
+//
+//            URLSession.shared.dataTask(with: userImageUrl) { (data, resp, error) in
+//                guard let data = data else {
+//                    completion(emptyTimeLine)
+//                    return
+//                }
+//                let entry = GithubUserEntry(date: Date(), userData: user, imageData: data)
+//                //Policy decides when to reload the widget. never -> remains fixed
+//                let timeline = Timeline(entries: [entry], policy: .atEnd)
+//                completion(timeline)
+//            }.resume()
+//        }
+//    }
+// }
