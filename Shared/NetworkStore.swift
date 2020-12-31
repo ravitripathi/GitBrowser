@@ -8,12 +8,14 @@
 import SwiftUI
 import Combine
 
-class NetworkStore: ObservableObject {
+public class NetworkStore: ObservableObject {
     @Published private(set) var repos: [Repo] = []
     @Published private(set) var isLoadingRepos: Bool = false
     @Published private(set) var following: [FollowingUser] = []
     @Published private(set) var isLoadingFollowList: Bool = false
     
+    public init() {
+    }
     func fetch() {
         self.isLoadingRepos = true
         NetworkManager.shared.getRepoList { (repos) -> (Void) in

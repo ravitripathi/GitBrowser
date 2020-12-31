@@ -20,14 +20,14 @@
             landmarkType = "0">
             <Locations>
                <Location
-                  uuid = "EDE5BE78-E57F-42D3-95B2-67229ADC2353 - abbedc22256abdb6"
+                  uuid = "EDE5BE78-E57F-42D3-95B2-67229ADC2353 - aebc46747e8b9438"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "closure #1 (Swift.Bool) -&gt; () in closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.Image, &lt;&lt;opaque return type of (extension in SwiftUI):SwiftUI.View.foregroundColor(Swift.Optional&lt;SwiftUI.Color&gt;) -&gt; some&gt;&gt;.0, SwiftUI.Button&lt;&lt;&lt;opaque return type of (extension in SwiftUI):SwiftUI.View.opacity(Swift.Double) -&gt; some&gt;&gt;.0&gt;)&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of (extension in SwiftUI):SwiftUI.View.cornerRadius(_: CoreGraphics.CGFloat, antialiased: Swift.Bool) -&gt; some&gt;&gt;.0, Swift.Optional&lt;&lt;&lt;opaque return type of (extension in SwiftUI):SwiftUI.View.foregroundColor(Swift.Optional&lt;SwiftUI.Color&gt;) -&gt; some&gt;&gt;.0&gt;)&gt; in GitBrowser.SearchBar.body.getter : some"
                   moduleName = "GitBrowser"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ravi/Documents/Arc/SwiftUI/GitBrowser/Shared/SearchBar/SearchBar.swift"
+                  urlString = "file:///Users/ravi/Documents/Arc/Arcadia/GitBrowser/Shared/SearchBar/SearchBar.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "17"
@@ -35,14 +35,14 @@
                   offsetFromSymbolStart = "47">
                </Location>
                <Location
-                  uuid = "EDE5BE78-E57F-42D3-95B2-67229ADC2353 - ff59dda09378e22b"
+                  uuid = "EDE5BE78-E57F-42D3-95B2-67229ADC2353 - fa5b47f6c899cba1"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "closure #2 () -&gt; () in closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.Image, &lt;&lt;opaque return type of (extension in SwiftUI):SwiftUI.View.foregroundColor(Swift.Optional&lt;SwiftUI.Color&gt;) -&gt; some&gt;&gt;.0, SwiftUI.Button&lt;&lt;&lt;opaque return type of (extension in SwiftUI):SwiftUI.View.opacity(Swift.Double) -&gt; some&gt;&gt;.0&gt;)&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of (extension in SwiftUI):SwiftUI.View.cornerRadius(_: CoreGraphics.CGFloat, antialiased: Swift.Bool) -&gt; some&gt;&gt;.0, Swift.Optional&lt;&lt;&lt;opaque return type of (extension in SwiftUI):SwiftUI.View.foregroundColor(Swift.Optional&lt;SwiftUI.Color&gt;) -&gt; some&gt;&gt;.0&gt;)&gt; in GitBrowser.SearchBar.body.getter : some"
                   moduleName = "GitBrowser"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ravi/Documents/Arc/SwiftUI/GitBrowser/Shared/SearchBar/SearchBar.swift"
+                  urlString = "file:///Users/ravi/Documents/Arc/Arcadia/GitBrowser/Shared/SearchBar/SearchBar.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "18"

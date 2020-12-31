@@ -7,47 +7,48 @@
 
 import SwiftUI
 
-struct ContentView: View {
+public struct ContentView: View {
+    @EnvironmentObject var netStore: NetworkStore
     @State var enteredTitle: String = AppData.lastCurrentUsername
     @State var doneLoading: Bool? = false
     @State var loaderStarted: Bool = false
-    var body: some View {
-        NavigationView {
-            VStack {
-                Spacer().frame(height: 50)
-                Text("Enter a github username to begin")
-                
-                HStack {
-                    Spacer().frame(width: 30)
-                    TextField("Enter the usernname", text: $enteredTitle)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .autocapitalization(.none)
-                        .disableAutocorrection(true)
-                    Spacer().frame(width: 30)
-                }
-                
-                Button(action: {
-                    loaderStarted = true
-                    AppData.currentUser.login = self.enteredTitle.trimmingCharacters(in: .whitespacesAndNewlines)
-                    AppData.selectedUser.login = AppData.currentUser.login
-                    AppData.lastCurrentUsername = self.enteredTitle.trimmingCharacters(in: .whitespacesAndNewlines)
-                    hitApi()
-                }, label: {
-                    Text("Let's go")
-                })
-                if loaderStarted {
-                    ProgressView()
-                    .progressViewStyle(CircularProgressViewStyle())
-                }
-                Spacer()
-                
-                NavigationLink(destination: MainView(user: AppData.currentUser), tag: true, selection: $doneLoading) {
-                    EmptyView()
-                }
-                
+    
+    public init() {
+    }
+    
+    public var body: some View {
+        VStack {
+            Spacer().frame(height: 50)
+            Text("Enter a github username to begin")
+            
+            HStack {
+                Spacer().frame(width: 30)
+                TextField("Enter the usernname", text: $enteredTitle)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .autocapitalization(.none)
+                    .disableAutocorrection(true)
+                Spacer().frame(width: 30)
             }
-            .navigationTitle("Welcome")
-        }
+            
+            Button(action: {
+                loaderStarted = true
+                AppData.currentUser.login = self.enteredTitle.trimmingCharacters(in: .whitespacesAndNewlines)
+                AppData.selectedUser.login = AppData.currentUser.login
+                AppData.lastCurrentUsername = self.enteredTitle.trimmingCharacters(in: .whitespacesAndNewlines)
+                hitApi()
+            }, label: {
+                Text("Let's go")
+            })
+            if loaderStarted {
+                ProgressView()
+                    .progressViewStyle(CircularProgressViewStyle())
+            }
+            Spacer()
+            
+            NavigationLink(destination: MainView(user: AppData.currentUser).environmentObject(self.netStore), tag: true, selection: $doneLoading) {
+                EmptyView()
+            }
+        }.navigationTitle("Welcome")
     }
     
     func hitApi() {

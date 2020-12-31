@@ -8,8 +8,9 @@
 import SwiftUI
 
 @main
-struct GitBrowserApp: App {
-    var body: some Scene {
+public struct GitBrowserApp: App {
+    public init() {}
+    public var body: some Scene {
         WindowGroup {
             ContentView()
                 .environmentObject(NetworkStore())
