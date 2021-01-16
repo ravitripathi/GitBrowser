@@ -31,9 +31,12 @@ struct MediumWidget: View {
                     .font(.title2)
                 Text("Followers: \(user.followers ?? 0)")
                 Text("Followers: \(user.following ?? 0)")
-                Text("Location: \(user.location ?? "Location")")
+                HStack {
+                    Image(systemName: "location.fill")
+                    Text("\(user.location ?? "Unknown")")
+                }
             }
-        }
+        }.padding()
     }
 }
 
