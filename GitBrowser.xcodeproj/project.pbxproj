@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		41113C3125B33971005D6444 /* GitBrowserWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C483DE24CC98E3000515E9 /* GitBrowserWidget.swift */; };
+		41113C3725B339F8005D6444 /* MediumWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41354EA824CD8DAC00E181CB /* MediumWidget.swift */; };
+		41113C3E25B339FF005D6444 /* GitBrowserWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 41C483E024CC98E3000515E9 /* GitBrowserWidget.intentdefinition */; };
 		411C390B259E5531009F8197 /* GitBrowser.h in Headers */ = {isa = PBXBuildFile; fileRef = 411C3909259E5531009F8197 /* GitBrowser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		411C390E259E5531009F8197 /* GitBrowser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 411C3907259E5531009F8197 /* GitBrowser.framework */; };
 		411C390F259E5531009F8197 /* GitBrowser.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 411C3907259E5531009F8197 /* GitBrowser.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -530,7 +533,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1200;
-				LastUpgradeCheck = 1200;
+				LastUpgradeCheck = 1230;
 				TargetAttributes = {
 					411C3906259E5531009F8197 = {
 						CreatedOnToolsVersion = 12.3;
@@ -635,9 +638,11 @@
 				411C3919259E554D009F8197 /* SearchBar.swift in Sources */,
 				411C391A259E554D009F8197 /* ViewControllerResolver.swift in Sources */,
 				411C391B259E554D009F8197 /* NetworkStore.swift in Sources */,
+				41113C3E25B339FF005D6444 /* GitBrowserWidget.intentdefinition in Sources */,
 				411C391C259E554D009F8197 /* NetworkManager.swift in Sources */,
 				411C391D259E554D009F8197 /* GitBrowserApp.swift in Sources */,
 				411C391E259E554D009F8197 /* ContentView.swift in Sources */,
+				41113C3725B339F8005D6444 /* MediumWidget.swift in Sources */,
 				411C391F259E554D009F8197 /* Assets.xcassets in Sources */,
 				411C3920259E554D009F8197 /* User.swift in Sources */,
 				411C3921259E554D009F8197 /* FollowingUser.swift in Sources */,
@@ -650,6 +655,7 @@
 				411C3928259E554D009F8197 /* Storage.swift in Sources */,
 				411C3929259E554D009F8197 /* AllRepoView.swift in Sources */,
 				411C392A259E554D009F8197 /* AppData.swift in Sources */,
+				41113C3125B33971005D6444 /* GitBrowserWidget.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1000,6 +1006,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = FABQJ9SY29;
@@ -1024,6 +1031,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = FABQJ9SY29;

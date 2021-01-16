@@ -6,33 +6,78 @@
 	<dict>
 		<key>GitBrowser (iOS).xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
-			<integer>2</integer>
+			<integer>0</integer>
 		</dict>
 		<key>GitBrowser (macOS).xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
-			<integer>5</integer>
+			<integer>2</integer>
 		</dict>
 		<key>GitBrowser.xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
-			<integer>6</integer>
+			<integer>5</integer>
 		</dict>
 		<key>GitBrowserWidgetExtension.xcscheme_^#shared#^_</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>4</integer>
-		</dict>
-		<key>WidgetIntentTarget.xcscheme_^#shared#^_</key>
-		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>3</integer>
 		</dict>
+		<key>WidgetIntentTarget.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>4</integer>
+		</dict>
 		<key>WidgetIntentTargetUI.xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
-			<integer>0</integer>
+			<integer>6</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>411C3906259E5531009F8197</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>4148480124C33E1300720E7B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>4148480924C33E1300720E7B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>41A2394424E96593009FF1A8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>41A2394D24E96593009FF1A8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>41C483D624CC98E3000515E9</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>

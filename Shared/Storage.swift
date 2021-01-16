@@ -20,7 +20,7 @@ struct Storage<T: Codable> {
     var wrappedValue: T {
         get {
             // Read value from UserDefaults
-            guard let data = UserDefaults(suiteName: "group.io.github.ravitripathi.GitBrowser")?.object(forKey: key) as? Data else {
+            guard let data = UserDefaults(suiteName: "group.io.github.ravitripathi.Arcadia")?.object(forKey: key) as? Data else {
                 // Return defaultValue when no data in UserDefaults
                 return defaultValue
             }
@@ -34,7 +34,7 @@ struct Storage<T: Codable> {
             let data = try? JSONEncoder().encode(newValue)
             
             // Set value to UserDefaults
-            UserDefaults(suiteName: "group.io.github.ravitripathi.GitBrowser")!.set(data, forKey: key)
+            UserDefaults(suiteName: "group.io.github.ravitripathi.Arcadia")!.set(data, forKey: key)
         }
     }
 }

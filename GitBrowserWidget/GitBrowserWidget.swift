@@ -19,12 +19,24 @@ struct GithubUserEntry: TimelineEntry {
 // Dynamic, confiurable widget
 // Contains logic for updating/viewing the widget
 struct GitBrowserIntentTimelineProvider: IntentTimelineProvider {
+    func placeholder(in context: Context) -> GithubUserEntry {
+        let user = User()
+        user.name = "Here's one dummy user"
+        user.login = "@userloginhere"
+        let imgData = UIImage(systemName: "person")!.pngData()!
+        return GithubUserEntry(date: Date(), userData: user, imageData: imgData)
+    }
+    
     typealias Entry = GithubUserEntry
     
     typealias Intent = GitBrowserIntentIntent
     
     func getSnapshot(for configuration: GitBrowserIntentIntent, in context: Context, completion: @escaping (GithubUserEntry) -> Void) {
-        let entry = GithubUserEntry(date: Date(), userData: User(), imageData: UIImage(systemName: "person")!.pngData()!)
+        let user = User()
+        user.name = "Here's one dummy user"
+        user.login = "@userloginhere"
+        let imgData = UIImage(systemName: "person")!.pngData()!
+        let entry = GithubUserEntry(date: Date(), userData: user, imageData: imgData)
         completion(entry)
     }
     
@@ -35,7 +47,11 @@ struct GitBrowserIntentTimelineProvider: IntentTimelineProvider {
             username = u
         }
         NetworkManager.shared.getUserDetails(forUsername: username) { (user) -> (Void) in
-            let emptyTimeLine = Timeline(entries: [GithubUserEntry(date: Date(), userData: User(), imageData: Data())], policy: .atEnd)
+            let dummyUser = User()
+            dummyUser.name = "Here's one dummy user"
+            dummyUser.login = "@userloginhere"
+            let imgData = UIImage(systemName: "person")!.pngData()!
+            let emptyTimeLine = Timeline(entries: [GithubUserEntry(date: Date(), userData: dummyUser, imageData: imgData)], policy: .atEnd)
             guard let user = user, let userImageUrlS = user.avatar_url, let userImageUrl = URL(string: userImageUrlS) else {
                 completion(emptyTimeLine)
                 return
@@ -72,17 +88,20 @@ struct WidgetEntryView: View {
     }
 }
 
-
-//This is the actual widget
-@main
-struct ArcWidget: Widget {
+public struct GitBrowserWidget: Widget {
     
-    private let kind = "ArcWidget"
+    private let kind = "GitBrowserWidget"
     
-    var body: some WidgetConfiguration {
+    public init() {}
+    
+    public var body: some WidgetConfiguration {
+        
         IntentConfiguration(kind: kind, intent: GitBrowserIntentIntent.self, provider: GitBrowserIntentTimelineProvider()) { entry in
             WidgetEntryView(entry: entry)
         }.supportedFamilies([.systemMedium])
+        .configurationDisplayName("GitBrowser")
+        .description("Display GitHub user data")
+
         //        Use this to set what sizes of widgets you want to support. Also works without it
         
         //        Building static widgets
