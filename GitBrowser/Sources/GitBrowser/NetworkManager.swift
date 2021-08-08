@@ -38,7 +38,7 @@ class NetworkManager: ObservableObject {
         guard let name = username, let url = API.following.getURL(forUsername: name) else {
             return
         }
-        let task = URLSession(configuration: URLSessionConfiguration.default).dataTask(with: url) { (data, response, error) in
+        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
             guard let httpResponse = response as? HTTPURLResponse,
                   (200...299).contains(httpResponse.statusCode) else {
                 completion(nil)
@@ -57,7 +57,7 @@ class NetworkManager: ObservableObject {
             completion(nil)
             return
         }
-        let task = URLSession(configuration: URLSessionConfiguration.default).dataTask(with: url) { (data, response, error) in
+        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
             guard let httpResponse = response as? HTTPURLResponse,
                   (200...299).contains(httpResponse.statusCode) else {
                 completion(nil)
@@ -76,7 +76,7 @@ class NetworkManager: ObservableObject {
             completion(nil)
             return
         }
-        let task = URLSession(configuration: URLSessionConfiguration.default).dataTask(with: url) { (data, response, error) in
+        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
             guard let httpResponse = response as? HTTPURLResponse,
                   (200...299).contains(httpResponse.statusCode), let data = data else {
                 completion(nil)
@@ -94,7 +94,7 @@ class NetworkManager: ObservableObject {
             completion(nil)
             return
         }
-        let task = URLSession(configuration: URLSessionConfiguration.default).dataTask(with: url) { (data, response, error) in
+        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
             guard let httpResponse = response as? HTTPURLResponse,
                   (200...299).contains(httpResponse.statusCode) else {
                 completion(nil)
