@@ -8,18 +8,19 @@
 
 import Foundation
 
-class User: Codable {
-    var login: String?
-    var avatar_url: String?
-    var html_url: String?
-    var starred_url: String?
-    var name: String?
-    var company: String?
-    var blog: String?
-    var location: String?
-    var email: String?
-    var bio: String?
-    var public_repos: Int?
-    var followers: Int?
-    var following: Int?
+public class User: Codable {
+    public var login: String?
+    public var avatar_url: String?
+    public var html_url: String?
+    public var starred_url: String?
+    public var name: String?
+    public var company: String?
+    public var blog: String?
+    public var location: String?
+    public var email: String?
+    public var bio: String?
+    public var public_repos: Int?
+    public var followers: Int?
+    public var following: Int?
+    public init() {}
 }

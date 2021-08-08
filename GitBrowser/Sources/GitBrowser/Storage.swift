@@ -8,7 +8,7 @@
 import Foundation
 
 @propertyWrapper
-struct Storage<T: Codable> {
+public struct Storage<T: Codable> {
     private let key: String
     private let defaultValue: T
     
@@ -17,7 +17,7 @@ struct Storage<T: Codable> {
         self.defaultValue = defaultValue
     }
     
-    var wrappedValue: T {
+    public var wrappedValue: T {
         get {
             // Read value from UserDefaults
             guard let data = UserDefaults(suiteName: "group.io.github.ravitripathi.Arcadia")?.object(forKey: key) as? Data else {

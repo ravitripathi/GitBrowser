@@ -28,9 +28,9 @@ enum API: String {
     }
 }
 
-class NetworkManager: ObservableObject {
+public class NetworkManager: ObservableObject {
     
-    static let shared = NetworkManager()
+    public static let shared = NetworkManager()
     static let baseURL = "https://api.github.com/users/"
     //By default, the URLSessions are GET requests
     func getFollowingList(forUsername username: String? = AppData.currentUser.login,
@@ -89,7 +89,7 @@ class NetworkManager: ObservableObject {
         task.resume()
     }
     
-    func getUserDetails(forUsername username: String? = AppData.currentUser.login, completion: @escaping (User?)->(Void)) {
+    public func getUserDetails(forUsername username: String? = AppData.currentUser.login, completion: @escaping (User?)->(Void)) {
         guard let name = username, let url = API.userDetail.getURL(forUsername: name) else {
             completion(nil)
             return
